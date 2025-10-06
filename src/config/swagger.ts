@@ -1,16 +1,21 @@
-import swaggerUi from "swagger-ui-express";
 import { Express } from "express";
-
-const swaggerDocument = {
-  openapi: "3.0.0",
-  info: {
-        title: "API Restaurante",
-    version: "1.0.0",
-    description: "Documentação da API Restaurante",
-  },
-  paths: {}, 
-};
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
 
 export function setupSwagger(app: Express) {
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  const options = {
+    definition: {
+      openapi: "3.0.0",
+      info: {
+        title: "API Restaurante",
+        version: "1.0.0",
+        description: "API para gerenciamento de restaurante",
+      },
+      servers: [{ url: "http://localhost:3000/api" }],
+    },
+    apis: ["./src/routes/*.ts"], // <-- ESSENCIAL para ler as rotas
+  };
+
+  const swaggerSpec = swaggerJsdoc(options);
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 }

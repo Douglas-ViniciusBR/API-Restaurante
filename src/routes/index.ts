@@ -1,9 +1,11 @@
 import { Router } from "express";
+import categoriaRoutes from "./categoriaRoutes";
+import pratoRoutes from "./pratoRoutes";
 
 const router = Router();
 
-// Aqui você vai registrar rotas de pedidos, pratos, clientes...
-// router.use('/clientes', clienteRoutes);
+// Rotas principais da API
+router.use("/categorias", categoriaRoutes);
+router.use("/pratos", pratoRoutes);
 
 export default router;
-
