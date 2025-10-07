@@ -3,17 +3,17 @@ import { z } from "zod";
 export const pratoSchema = z.object({
   nome: z
     .string()
-    .min(1, "Nome é obrigatório")
+    .min(1, "Nome Ã© obrigatÃ³rio")
     .max(100, "Nome muito longo"),
   preco: z
     .number()
-    .positive("Preço deve ser positivo"),
+    .positive("PreÃ§o deve ser positivo"),
   descricao: z
     .string()
     .optional(),
   categoriaId: z
     .number()
-    .int("ID da categoria deve ser um número inteiro")
+    .int("ID da categoria deve ser um nÃºmero inteiro")
     .positive("ID da categoria deve ser positivo"),
 });
 

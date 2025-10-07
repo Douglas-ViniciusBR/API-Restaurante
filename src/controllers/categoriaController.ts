@@ -14,10 +14,10 @@ export async function getAll(req: Request, res: Response) {
 
 export async function getOne(req: Request, res: Response) {
   try {
-    const id = parseInt(req.params.id, 10);
-    if (isNaN(id)) return res.status(400).json({ error: "ID inválido" });
+  const id = parseInt(String(req.params.id), 10);
+  if (isNaN(id)) return res.status(400).json({ error: "ID invÃ¡lido" });
     const categoria = await service.getCategoriaById(id);
-    if (!categoria) return res.status(404).json({ error: "Não encontrada" });
+    if (!categoria) return res.status(404).json({ error: "Nï¿½o encontrada" });
     res.json({ data: categoria });
   } catch (error) {
     res.status(500).json({ error: "Erro" });
@@ -27,7 +27,7 @@ export async function getOne(req: Request, res: Response) {
 export async function create(req: Request, res: Response) {
   try {
     const parsed = categoriaSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: "Dados inválidos", details: parsed.error.format() });
+    if (!parsed.success) return res.status(400).json({ error: "Dados invÃ¡lidos", details: parsed.error.format() });
     const nova = await service.createCategoria(parsed.data);
     res.status(201).json({ data: nova });
   } catch (error: any) {
@@ -38,22 +38,23 @@ export async function create(req: Request, res: Response) {
 
 export async function update(req: Request, res: Response) {
   try {
-    const id = parseInt(req.params.id, 10);
-    if (isNaN(id)) return res.status(400).json({ error: "ID inválido" });
+  const id = parseInt(String(req.params.id), 10);
+    if (isNaN(id)) return res.status(400).json({ error: "ID invÃ¡lido" });
     const parsed = categoriaSchema.partial().safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: "Dados inválidos" });
-    const atualizada = await service.updateCategoria(id, parsed.data);
+    if (!parsed.success) return res.status(400).json({ error: "Dados invï¿½lidos" });
+  if (!parsed.success) return res.status(400).json({ error: "Dados invÃ¡lidos" });
+  const atualizada = await service.updateCategoria(id, parsed.data as any);
     res.json({ data: atualizada });
   } catch (error: any) {
-    if (error.code === "P2025") return res.status(404).json({ error: "Não encontrada" });
+    if (error.code === "P2025") return res.status(404).json({ error: "Nï¿½o encontrada" });
     res.status(500).json({ error: "Erro" });
   }
 }
 
 export async function remove(req: Request, res: Response) {
   try {
-    const id = parseInt(req.params.id, 10);
-    if (isNaN(id)) return res.status(400).json({ error: "ID inválido" });
+  const id = parseInt(String(req.params.id), 10);
+    if (isNaN(id)) return res.status(400).json({ error: "ID invÃ¡lido" });
     await service.deleteCategoria(id);
     res.status(204).send();
   } catch (error: any) {

@@ -12,17 +12,25 @@ model Categoria {
   nome      String   @unique
   descricao String?
   createdAt DateTime @default(now())
-
   pratos    Prato[]
 }
 
 model Prato {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   nome        String
   preco       Float
   descricao   String?
   categoriaId Int
-  createdAt   DateTime @default(now())
-
+  createdAt   DateTime  @default(now())
+  pedidos     Pedido[]
   categoria   Categoria @relation(fields: [categoriaId], references: [id])
+}
+
+model Pedido {
+  id         Int      @id @default(autoincrement())
+  cliente    String
+  quantidade Int      @default(1)
+  pratoId    Int
+  createdAt  DateTime @default(now())
+  prato      Prato    @relation(fields: [pratoId], references: [id])
 }

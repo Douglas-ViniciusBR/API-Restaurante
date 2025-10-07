@@ -3,7 +3,7 @@ import { z } from "zod";
 export const categoriaSchema = z.object({
   nome: z
     .string()
-    .min(1, "Nome é obrigatório")
+    .min(1, "Nome Ã© obrigatÃ³rio")
     .max(100, "Nome muito longo"),
   descricao: z
     .string()
