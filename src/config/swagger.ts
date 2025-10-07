@@ -1,4 +1,4 @@
-import { Express } from "express";
+import type { Express } from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 
@@ -13,7 +13,7 @@ export function setupSwagger(app: Express) {
       },
       servers: [{ url: "http://localhost:3000/api" }],
     },
-    apis: ["./src/routes/*.ts"], // <-- ESSENCIAL para ler as rotas
+    apis: ["./src/routes/*.ts"],
   };
 
   const swaggerSpec = swaggerJsdoc(options);
