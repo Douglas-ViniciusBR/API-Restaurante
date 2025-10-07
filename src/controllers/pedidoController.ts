@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
-import { pedidoSchema } from "../models/Pedido.js";
-import * as service from "../services/pedidoService.js";
+import { pedidoSchema } from "../models/Pedido";
+import * as service from "../services/pedidoService";
+
 
 export async function getAll(req: Request, res: Response) {
   try {
