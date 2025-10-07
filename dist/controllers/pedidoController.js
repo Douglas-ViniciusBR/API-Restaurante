@@ -38,8 +38,8 @@ exports.getOne = getOne;
 exports.create = create;
 exports.update = update;
 exports.remove = remove;
-const Pedido_js_1 = require("../models/Pedido.js");
-const service = __importStar(require("../services/pedidoService.js"));
+const Pedido_1 = require("../models/Pedido");
+const service = __importStar(require("../services/pedidoService"));
 async function getAll(req, res) {
     try {
         const pedidos = await service.getAllPedidos();
@@ -67,7 +67,7 @@ async function getOne(req, res) {
 }
 async function create(req, res) {
     try {
-        const parsed = Pedido_js_1.pedidoSchema.safeParse(req.body);
+        const parsed = Pedido_1.pedidoSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: "Dados inválidos", details: parsed.error.format() });
         const novo = await service.createPedido(parsed.data);
@@ -83,7 +83,7 @@ async function update(req, res) {
         const id = parseInt(req.params.id ?? "", 10);
         if (isNaN(id))
             return res.status(400).json({ error: "ID inválido" });
-        const parsed = Pedido_js_1.pedidoSchema.safeParse(req.body);
+        const parsed = Pedido_1.pedidoSchema.safeParse(req.body);
         if (!parsed.success)
             return res.status(400).json({ error: "Dados inválidos", details: parsed.error.format() });
         const atualizado = await service.updatePedido(id, parsed.data);

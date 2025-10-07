@@ -1,4 +1,4 @@
-import { PedidoInput } from "../models/Pedido.js";
+import { PedidoInput } from "../models/Pedido";
 export declare function getAllPedidos(): Promise<({
     prato: {
         nome: string;

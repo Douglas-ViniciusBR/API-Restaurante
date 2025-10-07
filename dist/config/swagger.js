@@ -17,7 +17,7 @@ function setupSwagger(app) {
             },
             servers: [{ url: "http://localhost:3000/api" }],
         },
-        apis: ["./src/routes/*.ts"], // <-- ESSENCIAL para ler as rotas
+        apis: ["./src/routes/*.ts"],
     };
     const swaggerSpec = (0, swagger_jsdoc_1.default)(options);
     app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerSpec));
